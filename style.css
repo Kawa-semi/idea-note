@@ -1,5 +1,8 @@
-/* Reset & Base */
+/* =====================
+   Reset & Base
+   ===================== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
   --primary: #4f46e5; --primary-hover: #4338ca;
   --bg: #f8f7ff; --surface: #ffffff; --border: #e5e7eb;
@@ -9,17 +12,39 @@
   --shadow: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.10);
 }
-body { font-family: 'Hiragino Sans','Noto Sans JP',sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-/* Header */
-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+body {
+  font-family: 'Hiragino Sans','Noto Sans JP',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* =====================
+   Header
+   ===================== */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
 .header-left { display: flex; align-items: center; gap: 12px; }
 .logo { font-size: 30px; }
 header h1 { font-size: 20px; font-weight: 700; color: var(--primary); }
 .subtitle { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
 .header-right { display: flex; align-items: center; gap: 10px; }
 
-/* Sync */
+/* =====================
+   Sync
+   ===================== */
 .sync-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); background: #f3f4f6; padding: 5px 10px; border-radius: 20px; }
 .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; flex-shrink: 0; transition: background 0.3s; }
 .sync-dot.connected { background: var(--success); }
@@ -27,7 +52,9 @@ header h1 { font-size: 20px; font-weight: 700; color: var(--primary); }
 .sync-dot.error { background: var(--danger); }
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
 
-/* Buttons */
+/* =====================
+   Buttons
+   ===================== */
 .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; transition: all 0.15s; white-space: nowrap; }
 .btn-primary { background: var(--primary); color: white; }
 .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
@@ -36,7 +63,9 @@ header h1 { font-size: 20px; font-weight: 700; color: var(--primary); }
 .btn-google { background: white; color: #374151; border: 1px solid var(--border); }
 .btn-google:hover { background: #f9fafb; }
 
-/* Toolbar */
+/* =====================
+   Toolbar
+   ===================== */
 .toolbar { padding: 16px 28px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .search-box { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 7px 12px; flex: 1; min-width: 180px; max-width: 300px; }
 .search-box input { border: none; outline: none; width: 100%; font-size: 14px; background: transparent; }
@@ -46,7 +75,9 @@ header h1 { font-size: 20px; font-weight: 700; color: var(--primary); }
 .stats { margin-left: auto; font-size: 12px; color: var(--text-muted); display: flex; gap: 12px; }
 .stat-badge { background: var(--primary); color: white; border-radius: 10px; padding: 1px 7px; font-size: 11px; font-weight: 600; }
 
-/* Table */
+/* =====================
+   Table
+   ===================== */
 .table-wrapper { padding: 0 28px 40px; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); font-size: 14px; }
 thead tr { background: #f9fafb; border-bottom: 2px solid var(--border); }
@@ -60,23 +91,31 @@ td.cell-problem { font-weight: 500; }
 td.cell-memo { color: var(--text-muted); font-style: italic; font-size: 13px; }
 td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
 
-/* Status Badge */
+/* =====================
+   Status Badge
+   ===================== */
 .status-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; }
 .status-未対応 { background: #fee2e2; color: #dc2626; }
 .status-対応中 { background: #fef3c7; color: #d97706; }
 .status-完了   { background: #d1fae5; color: #059669; }
 
-/* Action Buttons */
+/* =====================
+   Action Buttons
+   ===================== */
 .action-cell { display: flex; gap: 4px; }
 .btn-icon { width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--border); background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.15s; }
 .btn-icon:hover { background: #f3f4f6; transform: scale(1.1); }
 
-/* Empty State */
+/* =====================
+   Empty State
+   ===================== */
 .empty-state { text-align: center; padding: 60px 20px; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
 .empty-icon { font-size: 48px; margin-bottom: 12px; }
 .empty-state p { color: var(--text-muted); margin-bottom: 20px; font-size: 15px; }
 
-/* Modal */
+/* =====================
+   Modal
+   ===================== */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); backdrop-filter: blur(2px); z-index: 200; align-items: center; justify-content: center; }
 .modal-overlay.open { display: flex; }
 .modal { background: var(--surface); border-radius: 14px; width: 100%; max-width: 520px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.2); animation: modalIn 0.2s ease; margin: 20px; }
@@ -92,20 +131,51 @@ td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
 .form-group textarea, .form-group select { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 14px; font-family: inherit; resize: vertical; color: var(--text); background: white; transition: border-color 0.15s; }
 .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
 
-/* Toast */
+/* =====================
+   Toast
+   ===================== */
 .toast { position: fixed; bottom: 28px; right: 28px; background: #1f2937; color: white; padding: 12px 20px; border-radius: 10px; font-size: 14px; box-shadow: var(--shadow-md); z-index: 300; transform: translateY(80px); opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; }
 .toast.show { transform: translateY(0); opacity: 1; }
 .toast.success { background: #065f46; }
 .toast.error { background: #7f1d1d; }
 .toast.info { background: #1e3a8a; }
 
-/* Responsive */
-@media(max-width:768px){ header{padding:12px 16px;flex-wrap:wrap;gap:10px} .toolbar{padding:12px 16px} .table-wrapper{padding:0 16px 30px} .stats{display:none} th:nth-child(4),td:nth-child(4),th:nth-child(5),td:nth-child(5){display:none} }
+/* =====================
+   PC/SP 出し分け
+   ===================== */
+.pc-only { display: flex; align-items: center; }
+.sp-only { display: none; }
 
 /* =====================
-   スマホ: カード表示
+   ハンバーガーボタン
+   ===================== */
+.hamburger { background: none; border: 1px solid var(--border); border-radius: 8px; font-size: 20px; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hamburger:hover { background: #f3f4f6; }
+
+/* =====================
+   スマホ ドロップダウンメニュー
+   ===================== */
+.sp-menu { display: none; position: fixed; top: 57px; right: 0; left: 0; z-index: 150; background: rgba(0,0,0,0.3); bottom: 0; }
+.sp-menu.open { display: block; }
+.sp-menu-inner { background: var(--surface); margin: 0 12px; border-radius: 0 0 12px 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-md); }
+.sp-menu-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); padding: 8px 12px; background: #f3f4f6; border-radius: 8px; }
+.sp-menu-btn { width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border); background: white; font-size: 14px; font-family: inherit; cursor: pointer; text-align: left; color: var(--text); }
+.sp-menu-btn:hover { background: #f3f4f6; }
+
+/* =====================
+   スマホ用カード非表示（PC）
+   ===================== */
+@media (min-width: 769px) {
+  #idea-tbody-cards { display: none !important; }
+}
+
+/* =====================
+   スマホ
    ===================== */
 @media (max-width: 768px) {
+  .pc-only { display: none !important; }
+  .sp-only { display: flex !important; }
+
   header {
     flex-wrap: nowrap;
     position: fixed;
@@ -133,144 +203,16 @@ td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
   .table-wrapper {
     padding: 130px 12px 30px;
   }
-}
 
   .stats { display: none; }
   #idea-table { display: none; }
 
-  #idea-tbody-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  #idea-tbody-cards { display: flex; flex-direction: column; gap: 10px; }
 
-  .idea-card {
-    background: var(--surface);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 14px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    cursor: pointer;
-    transition: box-shadow 0.15s;
-  }
+  .idea-card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; transition: box-shadow 0.15s; }
   .idea-card:active { box-shadow: var(--shadow-md); }
 
-  .card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-
-  .card-problem {
-    font-weight: 600;
-    font-size: 15px;
-    flex: 1;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 8px;
-    border-top: 1px solid var(--border);
-  }
-}
-
-@media (min-width: 769px) {
-  #idea-tbody-cards { display: none; }
-}
-@media (min-width: 769px) {
-  #idea-tbody-cards { display: none !important; }
-}
-/* =====================
-   PC/SP 出し分け
-   ===================== */
-.pc-only { display: flex; align-items: center; }
-.sp-only { display: none; }
-
-@media (max-width: 768px) {
-  .pc-only { display: none !important; }
-  .sp-only { display: flex !important; }
-}
-
-/* =====================
-   ハンバーガーボタン
-   ===================== */
-.hamburger {
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 20px;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text);
-}
-.hamburger:hover { background: #f3f4f6; }
-
-/* =====================
-   スマホ ドロップダウンメニュー
-   ===================== */
-.sp-menu {
-  display: none;
-  position: fixed;
-  top: 57px;
-  right: 0;
-  left: 0;
-  z-index: 150;
-  background: rgba(0,0,0,0.3);
-  bottom: 0;
-}
-
-.sp-menu.open {
-  display: block;
-}
-
-.sp-menu-inner {
-  background: var(--surface);
-  margin: 0 12px;
-  border-radius: 0 0 12px 12px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: var(--shadow-md);
-}
-
-.sp-menu-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--text-muted);
-  padding: 8px 12px;
-  background: #f3f4f6;
-  border-radius: 8px;
-}
-
-.sp-menu-btn {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: white;
-  font-size: 14px;
-  font-family: inherit;
-  cursor: pointer;
-  text-align: left;
-  color: var(--text);
-}
-.sp-menu-btn:hover { background: #f3f4f6; }
-
-/* スマホ時のtoolbar top調整 */
-@media (max-width: 768px) {
-  header { flex-wrap: nowrap; }
-  .toolbar { top: 57px; }
-  .table-wrapper { padding: 130px 12px 30px; }
+  .card-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .card-problem { font-weight: 600; font-size: 15px; flex: 1; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--border); }
 }
