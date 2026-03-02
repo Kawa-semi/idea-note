@@ -168,3 +168,7 @@ td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
     border-top: 1px solid var(--border);
   }
 }
+
+@media (min-width: 769px) {
+  #idea-tbody-cards { display: none; }
+}
