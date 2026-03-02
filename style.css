@@ -175,3 +175,92 @@ td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
 @media (min-width: 769px) {
   #idea-tbody-cards { display: none !important; }
 }
+/* =====================
+   PC/SP 出し分け
+   ===================== */
+.pc-only { display: flex; align-items: center; }
+.sp-only { display: none; }
+
+@media (max-width: 768px) {
+  .pc-only { display: none !important; }
+  .sp-only { display: flex !important; }
+}
+
+/* =====================
+   ハンバーガーボタン
+   ===================== */
+.hamburger {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+}
+.hamburger:hover { background: #f3f4f6; }
+
+/* =====================
+   スマホ ドロップダウンメニュー
+   ===================== */
+.sp-menu {
+  display: none;
+  position: fixed;
+  top: 57px;
+  right: 0;
+  left: 0;
+  z-index: 150;
+  background: rgba(0,0,0,0.3);
+  bottom: 0;
+}
+
+.sp-menu.open {
+  display: block;
+}
+
+.sp-menu-inner {
+  background: var(--surface);
+  margin: 0 12px;
+  border-radius: 0 0 12px 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow-md);
+}
+
+.sp-menu-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  background: #f3f4f6;
+  border-radius: 8px;
+}
+
+.sp-menu-btn {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: white;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+}
+.sp-menu-btn:hover { background: #f3f4f6; }
+
+/* スマホ時のtoolbar top調整 */
+@media (max-width: 768px) {
+  header { flex-wrap: nowrap; }
+  .toolbar { top: 57px; }
+  .table-wrapper { padding: 130px 12px 30px; }
+}
