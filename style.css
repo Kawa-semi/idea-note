@@ -106,24 +106,34 @@ td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
    スマホ: カード表示
    ===================== */
 @media (max-width: 768px) {
-  /* ツールバーを固定 */
+  header {
+    flex-wrap: nowrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 10px 12px;
+  }
+
   .toolbar {
     position: fixed;
-    top: 57px; /* headerの高さ分下げる */
+    top: 60px;
     left: 0;
     right: 0;
     z-index: 99;
     background: var(--bg);
     border-bottom: 1px solid var(--border);
-    padding: 10px 12px;
-    gap: 8px;
+    padding: 8px 12px;
+    gap: 6px;
     box-shadow: var(--shadow);
+    flex-wrap: wrap;
   }
 
-  /* ツールバー固定分だけテーブルを下げる */
   .table-wrapper {
-    padding: 120px 12px 30px; /* 上に固定分の余白 */
+    padding: 130px 12px 30px;
   }
+}
 
   .stats { display: none; }
   #idea-table { display: none; }
