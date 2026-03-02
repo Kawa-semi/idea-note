@@ -303,7 +303,13 @@ function closeModalOutside(e) {
 }
 
 async function saveIdea() {
-  const title    = document.getElementById('input-title').value.trim();
+  const title = document.getElementById('input-title').value.trim();
+  if (!title) {
+    document.getElementById('input-title').style.borderColor = '#ef4444';
+    document.getElementById('input-title').focus();
+    return;
+  }
+  document.getElementById('input-title').style.borderColor = '';
   const problem  = document.getElementById('input-problem').value.trim();
   const solution = document.getElementById('input-solution').value.trim();
   const memo     = document.getElementById('input-memo').value.trim();
