@@ -365,7 +365,6 @@ function renderTable() {
   const empty = document.getElementById('empty-state');
   const table = document.getElementById('idea-table');
 
-  // カード用コンテナを動的生成（なければ作る）
   let cardsEl = document.getElementById('idea-tbody-cards');
   if (!cardsEl) {
     cardsEl = document.createElement('div');
@@ -375,8 +374,8 @@ function renderTable() {
 
   let filtered = ideas.filter(idea => {
     const matchFilter = currentFilter === 'all' || idea.status === currentFilter;
-    const q = currentSearchQuery.toLowerCase();
-    const matchSearch = !q || [idea.problem, idea.solution, idea.effect, idea.memo]
+    const q = (currentSearchQuery || '').toLowerCase();
+    const matchSearch = !q || [idea.title, idea.problem, idea.solution, idea.memo]
       .some(f => f && f.toLowerCase().includes(q));
     return matchFilter && matchSearch;
   });
@@ -391,7 +390,6 @@ function renderTable() {
     empty.style.display = 'none';
   }
 
- // テーブル行
   tbody.innerHTML = filtered.map((idea, idx) => `
     <tr>
       <td class="num">${idx + 1}</td>
@@ -410,7 +408,6 @@ function renderTable() {
     </tr>
   `).join('');
 
-  // スマホ用カード（アイデア名のみ表示）
   cardsEl.innerHTML = filtered.map(idea => `
     <div class="idea-card" onclick="openModal('${idea.id}')">
       <div class="card-header">
@@ -426,7 +423,7 @@ function renderTable() {
       </div>
     </div>
   `).join('');
-}  
+}
 function renderStats() {
   const total    = ideas.length;
   const pending  = ideas.filter(i => i.status === '未対応').length;
