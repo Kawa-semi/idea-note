@@ -59,6 +59,26 @@ function initGoogleAPIs() {
 function maybeEnableAuth() {
   if (gapiInited && gsiInited) {
     document.getElementById('auth-btn').disabled = false;
+    // 保存済みトークンがあれば自動復元
+    const saved = localStorage.getItem('gToken');
+    if (saved) {
+      try {
+        const { token, expiry } = JSON.parse(saved);
+        if (Date.now() < expiry) {
+          gapi.client.setToken(token);
+          isSignedIn = true;
+          updateAuthUI();
+          setSyncStatus('syncing', '同期中...');
+          loadFromDrive().then(() => {
+            setSyncStatus('connected', 'Google Drive接続済み');
+          });
+        } else {
+          localStorage.removeItem('gToken'); // 期限切れ削除
+        }
+      } catch(e) {
+        localStorage.removeItem('gToken');
+      }
+    }
   }
 }
 
@@ -76,6 +96,11 @@ async function onTokenReceived(response) {
     return;
   }
   isSignedIn = true;
+  // トークンをlocalStorageに保存
+  localStorage.setItem('gToken', JSON.stringify({
+    token: gapi.client.getToken(),
+    expiry: Date.now() + 3500 * 1000
+  }));
   updateAuthUI();
   setSyncStatus('syncing', '同期中...');
   await loadFromDrive();
@@ -86,6 +111,7 @@ async function onTokenReceived(response) {
 function signOut() {
   google.accounts.oauth2.revoke(gapi.client.getToken().access_token, () => {
     gapi.client.setToken(null);
+    localStorage.removeItem('gToken');
     isSignedIn = false;
     driveFileId = null;
     updateAuthUI();
