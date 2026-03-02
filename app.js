@@ -276,12 +276,8 @@ function closeModalOutside(e) {
 }
 
 async function saveIdea() {
-  const problem = document.getElementById('input-problem').value.trim();
-  if (!problem) {
-    document.getElementById('input-problem').style.borderColor = '#ef4444';
-    return;
-  }
-  document.getElementById('input-problem').style.borderColor = '';
+    const problem = document.getElementById('input-problem').value.trim();
+    document.getElementById('input-problem').style.borderColor = '';
 
   const idea = {
     id:       editingId || Date.now().toString(),
