@@ -4,7 +4,7 @@
 const CONFIG = {
   CLIENT_ID: '310911047336-ulds9lmrrl9f1u8udg7g32892f10q61q.apps.googleusercontent.com',          // Google Cloud ConsoleのOAuth 2.0クライアントID
   API_KEY:   'AIzaSyBqEcxCYAMEJiP9F2Yx0kXOM5mNTxq1jnM',             // Google Cloud ConsoleのAPIキー
-  FOLDER_ID: '1Z2iDVNXQpxNe3dglGVzq5HOn04ySpn4g', // Google DriveのフォルダID
+  FOLDER_ID: '1Uvq0uyl39XwLz2H43uR2Iq4B9290e6-r', // Google DriveのフォルダID
   DATA_FILE:   'ideaNote_data.json',
   BACKUP_FILE: 'ideaNote_backup_{DATE}.json',
   BACKUP_INTERVAL_MS: 7 * 24 * 60 * 60 * 1000,  // 7日
