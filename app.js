@@ -469,10 +469,10 @@ function setSyncStatus(type, text) {
   const txt = document.getElementById('sync-text');
   const dotSp = document.getElementById('sync-dot-sp');
   const txtSp = document.getElementById('sync-text-sp');
-  dot.className = 'sync-dot' + (type ? ' ' + type : '');
-  txt.textContent = text;
-  dotSp.className = 'sync-dot' + (type ? ' ' + type : '');
-  txtSp.textContent = text;
+  if (dot) dot.className = 'sync-dot' + (type ? ' ' + type : '');
+  if (txt) txt.textContent = text;
+  if (dotSp) dotSp.className = 'sync-dot' + (type ? ' ' + type : '');
+  if (txtSp) txtSp.textContent = text;
 }
 
 let toastTimer;
