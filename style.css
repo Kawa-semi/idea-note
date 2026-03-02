@@ -106,11 +106,26 @@ td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
    スマホ: カード表示
    ===================== */
 @media (max-width: 768px) {
-  .toolbar { padding: 12px 16px; }
-  .table-wrapper { padding: 0 12px 30px; }
-  .stats { display: none; }
+  /* ツールバーを固定 */
+  .toolbar {
+    position: fixed;
+    top: 57px; /* headerの高さ分下げる */
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 12px;
+    gap: 8px;
+    box-shadow: var(--shadow);
+  }
 
-  /* テーブルを非表示にしてカードに切り替え */
+  /* ツールバー固定分だけテーブルを下げる */
+  .table-wrapper {
+    padding: 120px 12px 30px; /* 上に固定分の余白 */
+  }
+
+  .stats { display: none; }
   #idea-table { display: none; }
 
   #idea-tbody-cards {
@@ -127,12 +142,16 @@ td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
     display: flex;
     flex-direction: column;
     gap: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.15s;
   }
+  .idea-card:active { box-shadow: var(--shadow-md); }
 
   .card-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
   }
 
   .card-problem {
@@ -141,34 +160,11 @@ td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
     flex: 1;
   }
 
-  .card-row {
-    display: grid;
-    grid-template-columns: 64px 1fr;
-    gap: 4px 8px;
-    font-size: 13px;
-  }
-
-  .card-label {
-    color: var(--text-muted);
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding-top: 2px;
-  }
-
-  .card-value { color: var(--text); line-height: 1.5; }
-  .card-value.memo { color: var(--text-muted); font-style: italic; }
-
   .card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 4px;
     padding-top: 8px;
     border-top: 1px solid var(--border);
   }
-}
-
-@media (min-width: 769px) {
-  #idea-tbody-cards { display: none; }
 }
