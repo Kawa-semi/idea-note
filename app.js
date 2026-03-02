@@ -352,6 +352,14 @@ function renderTable() {
   const empty = document.getElementById('empty-state');
   const table = document.getElementById('idea-table');
 
+  // カード用コンテナを動的生成（なければ作る）
+  let cardsEl = document.getElementById('idea-tbody-cards');
+  if (!cardsEl) {
+    cardsEl = document.createElement('div');
+    cardsEl.id = 'idea-tbody-cards';
+    table.parentNode.insertBefore(cardsEl, table.nextSibling);
+  }
+
   let filtered = ideas.filter(idea => {
     const matchFilter = currentFilter === 'all' || idea.status === currentFilter;
     const q = currentSearchQuery.toLowerCase();
@@ -362,12 +370,15 @@ function renderTable() {
 
   if (filtered.length === 0) {
     table.style.display = 'none';
+    cardsEl.style.display = 'none';
     empty.style.display = 'block';
   } else {
     table.style.display = '';
+    cardsEl.style.display = '';
     empty.style.display = 'none';
   }
 
+  // テーブル行
   tbody.innerHTML = filtered.map((idea, idx) => `
     <tr>
       <td class="num">${idx + 1}</td>
@@ -384,6 +395,38 @@ function renderTable() {
         </div>
       </td>
     </tr>
+  `).join('');
+
+  // スマホ用カード
+  cardsEl.innerHTML = filtered.map(idea => `
+    <div class="idea-card">
+      <div class="card-header">
+        <div class="card-problem">${esc(idea.problem) || '（問題未入力）'}</div>
+        <span class="status-badge status-${idea.status}">${idea.status}</span>
+      </div>
+      ${idea.solution ? `
+      <div class="card-row">
+        <span class="card-label">解決策</span>
+        <span class="card-value">${esc(idea.solution)}</span>
+      </div>` : ''}
+      ${idea.effect ? `
+      <div class="card-row">
+        <span class="card-label">効果</span>
+        <span class="card-value">${esc(idea.effect)}</span>
+      </div>` : ''}
+      ${idea.memo ? `
+      <div class="card-row">
+        <span class="card-label">Memo</span>
+        <span class="card-value memo">${esc(idea.memo)}</span>
+      </div>` : ''}
+      <div class="card-footer">
+        <span style="font-size:12px;color:var(--text-muted)">${idea.date || ''}</span>
+        <div class="action-cell">
+          <button class="btn-icon" onclick="openModal('${idea.id}')">✏️</button>
+          <button class="btn-icon" onclick="deleteIdea('${idea.id}')">🗑️</button>
+        </div>
+      </div>
+    </div>
   `).join('');
 }
 
