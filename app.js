@@ -279,17 +279,18 @@ function openModal(id = null) {
   document.getElementById('modal-title').textContent = id ? 'アイデアを編集' : 'アイデアを追加';
   if (id) {
     const idea = ideas.find(i => i.id === id);
+    document.getElementById('input-title').value    = idea.title    || '';
     document.getElementById('input-problem').value  = idea.problem  || '';
     document.getElementById('input-solution').value = idea.solution || '';
-    document.getElementById('input-effect').value   = idea.effect   || '';
     document.getElementById('input-memo').value     = idea.memo     || '';
     document.getElementById('input-status').value   = idea.status   || '未対応';
   } else {
-    ['problem','solution','effect','memo'].forEach(f => document.getElementById('input-'+f).value = '');
+    ['title','problem','solution','memo'].forEach(f =>
+      document.getElementById('input-'+f).value = '');
     document.getElementById('input-status').value = '未対応';
   }
   document.getElementById('modal-overlay').classList.add('open');
-  document.getElementById('input-problem').focus();
+  document.getElementById('input-title').focus();
 }
 
 function closeModal() {
@@ -302,17 +303,19 @@ function closeModalOutside(e) {
 }
 
 async function saveIdea() {
-    const problem = document.getElementById('input-problem').value.trim();
-    document.getElementById('input-problem').style.borderColor = '';
+  const title    = document.getElementById('input-title').value.trim();
+  const problem  = document.getElementById('input-problem').value.trim();
+  const solution = document.getElementById('input-solution').value.trim();
+  const memo     = document.getElementById('input-memo').value.trim();
 
   const idea = {
-    id:       editingId || Date.now().toString(),
+    id:        editingId || Date.now().toString(),
+    title,
     problem,
-    solution: document.getElementById('input-solution').value.trim(),
-    effect:   document.getElementById('input-effect').value.trim(),
-    memo:     document.getElementById('input-memo').value.trim(),
-    status:   document.getElementById('input-status').value,
-    date:     editingId ? ideas.find(i=>i.id===editingId).date : new Date().toLocaleDateString('ja-JP'),
+    solution,
+    memo,
+    status:    document.getElementById('input-status').value,
+    date:      editingId ? ideas.find(i=>i.id===editingId).date : new Date().toLocaleDateString('ja-JP'),
     updatedAt: new Date().toISOString(),
   };
 
@@ -378,13 +381,13 @@ function renderTable() {
     empty.style.display = 'none';
   }
 
-  // テーブル行
+ // テーブル行
   tbody.innerHTML = filtered.map((idea, idx) => `
     <tr>
       <td class="num">${idx + 1}</td>
-      <td class="cell-problem">${esc(idea.problem)}</td>
+      <td class="cell-problem">${esc(idea.title)}</td>
+      <td>${esc(idea.problem)}</td>
       <td>${esc(idea.solution)}</td>
-      <td>${esc(idea.effect)}</td>
       <td class="cell-memo">${esc(idea.memo)}</td>
       <td><span class="status-badge status-${idea.status}">${idea.status}</span></td>
       <td class="cell-date">${idea.date || ''}</td>
@@ -397,39 +400,22 @@ function renderTable() {
     </tr>
   `).join('');
 
-  // スマホ用カード
+  // スマホ用カード（アイデア名のみ表示）
   cardsEl.innerHTML = filtered.map(idea => `
-    <div class="idea-card">
+    <div class="idea-card" onclick="openModal('${idea.id}')">
       <div class="card-header">
-        <div class="card-problem">${esc(idea.problem) || '（問題未入力）'}</div>
+        <div class="card-problem">${esc(idea.title) || '（アイデア名未入力）'}</div>
         <span class="status-badge status-${idea.status}">${idea.status}</span>
       </div>
-      ${idea.solution ? `
-      <div class="card-row">
-        <span class="card-label">解決策</span>
-        <span class="card-value">${esc(idea.solution)}</span>
-      </div>` : ''}
-      ${idea.effect ? `
-      <div class="card-row">
-        <span class="card-label">効果</span>
-        <span class="card-value">${esc(idea.effect)}</span>
-      </div>` : ''}
-      ${idea.memo ? `
-      <div class="card-row">
-        <span class="card-label">Memo</span>
-        <span class="card-value memo">${esc(idea.memo)}</span>
-      </div>` : ''}
       <div class="card-footer">
         <span style="font-size:12px;color:var(--text-muted)">${idea.date || ''}</span>
         <div class="action-cell">
-          <button class="btn-icon" onclick="openModal('${idea.id}')">✏️</button>
-          <button class="btn-icon" onclick="deleteIdea('${idea.id}')">🗑️</button>
+          <button class="btn-icon" onclick="event.stopPropagation();openModal('${idea.id}')">✏️</button>
+          <button class="btn-icon" onclick="event.stopPropagation();deleteIdea('${idea.id}')">🗑️</button>
         </div>
       </div>
     </div>
   `).join('');
-}
-
 function renderStats() {
   const total    = ideas.length;
   const pending  = ideas.filter(i => i.status === '未対応').length;
