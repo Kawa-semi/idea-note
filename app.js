@@ -478,3 +478,18 @@ function showToast(msg, type = '') {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
 }
+function toggleMenu() {
+  const menu = document.getElementById('sp-menu');
+  menu.classList.toggle('open');
+}
+
+// メニュー外タップで閉じる
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('sp-menu');
+  const btn = document.getElementById('hamburger-btn');
+  if (menu.classList.contains('open') &&
+      !menu.contains(e.target) &&
+      !btn.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
