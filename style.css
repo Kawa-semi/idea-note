@@ -172,10 +172,12 @@ td.cell-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
 /* =====================
    スマホ
    ===================== */
-@media (max-width: 768px) {
-  .pc-only { display: none !important; }
-  .sp-only { display: flex !important; }
+/* これがあればOK */
+.sp-only { display: none; }
 
+@media (max-width: 768px) {
+  .sp-only { display: flex !important; }
+}
   header {
     flex-wrap: nowrap;
     position: fixed;
