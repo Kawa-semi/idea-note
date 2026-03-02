@@ -422,6 +422,7 @@ function renderTable() {
       </div>
     </div>
   `).join('');
+}  
 function renderStats() {
   const total    = ideas.length;
   const pending  = ideas.filter(i => i.status === '未対応').length;
